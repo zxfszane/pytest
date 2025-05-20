@@ -74,6 +74,7 @@ def exception_handler(func):
     返回:
         function: 包装后的函数。
     """
+
     def wrapper(*err_args, **kwargs):
         try:
             return func(*err_args, **kwargs)
@@ -101,12 +102,15 @@ def load_config(config_path="config.json"):
     try:
         with open(config_path, "r", encoding="utf-8") as f:
             return json.load(f)
+        return None
     except FileNotFoundError:
         logging.error(f"配置文件未找到: {config_path}")
         sys.exit("配置文件缺失，程序终止运行！")
+        return None
     except json.JSONDecodeError as e:
         logging.error(f"配置文件格式错误: {e}")
         sys.exit("配置文件格式错误，程序终止运行！")
+        return None
 
 
 # 日志增强
@@ -229,10 +233,10 @@ def main_process():
         web.open_web()
         web.web_upload_software(test_file)
         web.close_web()
-        
+
         # logging.basicConfig() 只会在第一次调用时生效，后续再次调用不会改变已存在的日志配置
         # logging.getLogger().setLevel(logging.DEBUG)
-        
+
         # 初始化 SSH 客户端并校验 MD5
         ssh_client = SSHClientWrapper(server_ip, user_name, user_pwd)
 
@@ -248,7 +252,7 @@ def main_process():
 
         ssh_client.reboot()
         logging.info(f"等待设备重启中...")
-        time.sleep(60*4)
+        time.sleep(60 * 4)
         logging.info(f"设备重启完成")
 
         md5_value = ssh_client.get_file_md5(test_file)
@@ -267,11 +271,12 @@ def main_process():
         web.close_web()
 
         logging.info(f"等待设备重启2中...")
-        time.sleep(60*4)
+        time.sleep(60 * 4)
         logging.info(f"设备重启2完成")
 
         logging.info(f"第 {count} 次执行完成")
         time.sleep(5)
+
 
 if __name__ == "__main__":
     # 检查依赖项
