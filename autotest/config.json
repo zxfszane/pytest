@@ -1,0 +1,23 @@
+{
+    "_comment": {
+        "server_ip": "Web 服务器的 IP 地址",
+        "user_name": "登录用户名",
+        "user_pwd": "登录密码",
+        "conn_ip": "串口连接的 IP 地址",
+        "conn_port": "串口连接的端口号",
+        "test_file": "测试文件名",
+        "detail_print": "是否打印详细信息 (0/1)",
+        "terminate_on_md5_mismatch": "MD5 校验失败时是否终止脚本 (0/1)",
+        "loop_check_count": "循环执行的次数"
+    },
+    "server_ip": "10.138.103.124",
+    "user_name": "admin",
+    "user_pwd": "admin_default",
+    "conn_ip": "10.138.105.248",
+    "conn_port": 10002,
+    "test_file": "LSW-R6.bin",
+    "original_file": "NSW5630-H9C8.0.96R6.bin",
+    "detail_print": 1,
+    "terminate_on_md5_mismatch": 1,
+    "loop_check_count": 999
+}
